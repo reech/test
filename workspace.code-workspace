@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../spindate"
+		},
+		{
+			"path": "../mxweb/vmx-admin-client"
+		}
+	],
+	"settings": {}
+}
