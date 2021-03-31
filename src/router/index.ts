@@ -15,6 +15,7 @@ const routes: Array<RouteConfig> = [
 		path: "/price",
 		name: "Price",
 		component: Price,
+		props: true
 	},
 ]
 

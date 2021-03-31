@@ -8,8 +8,7 @@ export type HomeData = {
 	birthnumber: string
 	firstname: string
 	lastname: string
-	email: string,
-	estimatedPrice: number
+	email: string
 }
 
 export type EstimatedPriceRequest = Omit<HomeData, "inProgress"|"bonusOptions"|"estimatedPrice">

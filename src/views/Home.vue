@@ -90,7 +90,7 @@
 				</div>
 			</div>
 
-			<!-- E-mail -->
+			<!-- Buttons -->
 			<div class="form-group row">
 				<div class="col-12">
 					<button type="button" :disabled="!canSubmit" class="btn btn-dark btn-round" :class="{ 'btn-loading': inProgress }" @click.prevent="submit()"><small>Beregn pris</small></button
@@ -118,8 +118,7 @@ export default Vue.extend({
 			birthnumber: "",
 			firstname: "",
 			lastname: "",
-			email: "",
-			estimatedPrice: 0,
+			email: ""
 		}
 	},
 	mounted() {
@@ -144,8 +143,12 @@ export default Vue.extend({
 					estimatedPrice: 2999,
 				})
 				const { data } = await axios.post<EstimatedPriceResponse>(`${server}/api/price/calculate`, req)
-				this.estimatedPrice = data.estimatedPrice
 				this.inProgress = false
+				this.$router.push({ name: 'Price', params: {
+					estimatedPrice: data.estimatedPrice.toString(),
+					name: this.name,
+					cReg: this.cReg
+				}})
 			} catch (e) {
 				console.error("Error", e)
 				this.inProgress = false
@@ -162,6 +165,9 @@ export default Vue.extend({
 			this.lastname = ""
 			this.email = ""
 		},
+		capitalize(s: string): string {
+			return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
+		}
 	},
 	computed: {
 		validCReg(): boolean | null {
@@ -197,6 +203,11 @@ export default Vue.extend({
 		canSubmit(): boolean {
 			return this.validCReg === true && this.validBonus === true && this.validBirthNumber === true && this.validFirstName === true && this.validLastName === true && this.validEmail === true
 		},
+		name(): string {
+			const firstname: string = this.capitalize(this.firstname)
+			const lastname: string = this.capitalize(this.lastname)
+			return firstname + " " + lastname
+		}
 	},
 })
 </script>
