@@ -93,7 +93,7 @@
 			<!-- Buttons -->
 			<div class="form-group row">
 				<div class="col-12">
-					<button type="button" :disabled="!canSubmit" class="btn btn-dark btn-round" :class="{ 'btn-loading': inProgress }" @click.prevent="submit()"><small>Beregn pris</small></button
+					<button type="submit" :disabled="!canSubmit" class="btn btn-dark btn-round" :class="{ 'btn-loading': inProgress }" @click.prevent="submit()"><small>Beregn pris</small></button
 					>&nbsp;
 					<button type="button" class="btn btn-light btn-round" @click.prevent="cancel()"><small>Avbryt</small></button>
 				</div>
@@ -118,7 +118,8 @@ export default Vue.extend({
 			birthnumber: "",
 			firstname: "",
 			lastname: "",
-			email: ""
+			email: "",
+			estimatedPrice: 0
 		}
 	},
 	mounted() {
@@ -144,6 +145,7 @@ export default Vue.extend({
 				})
 				const { data } = await axios.post<EstimatedPriceResponse>(`${server}/api/price/calculate`, req)
 				this.inProgress = false
+				this.estimatedPrice = data.estimatedPrice
 				this.$router.push({ name: 'Price', params: {
 					estimatedPrice: data.estimatedPrice.toString(),
 					name: this.name,
