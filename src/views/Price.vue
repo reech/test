@@ -8,7 +8,7 @@
 		<div class="row">
 			<div class="col-12 py-2">
 				<h5>Hei, {{ name }}</h5>
-				<p>Her er din estimerte pris på forsikringen.</p>
+				<p>Her er din estimerte pris på forsikringen. Du har også fått tilbudet på e-post.</p>
 			</div>
 		</div>
 		<div class="row">
